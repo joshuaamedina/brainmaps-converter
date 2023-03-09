@@ -72,7 +72,6 @@ def main():
     # Replace the target string
     l2 = filedata.split('NaN')
     l3 = []
-    print(len(l2))
     for x in l2:
         if x.isspace():
             continue
