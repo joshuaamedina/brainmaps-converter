@@ -1,0 +1,80 @@
+{
+  "checkpointable": false,
+  "name": "{{ app.name }}",
+  "executionSystem": "tacc.ls6.joshuaam",
+  "executionType": "HPC",
+  "deploymentPath": "{{ username }}/apps/{{ app.name }}-{{ app.version }}",
+  "deploymentSystem": "tacc.work.joshuaam",
+  "helpURI": "",
+  "label": "{{ app.label }}",
+  "shortDescription": "{{ app.description }}",
+  "longDescription": "",
+  "modules": [
+    "load tacc-singularity"
+  ],
+  "ontology": [],
+  "parallelism": "SERIAL",
+  "tags": [],
+  "templatePath": "runner.sh",
+  "testPath": "tester.sh",
+  "version": "{{ app.version }}",
+  "defaultMaxRunTime": "00:30:00",
+  "inputs": [    {
+    "id": "mnifile",
+    "details": {
+      "label": "An MNI file"
+    },
+    "semantics": {}
+  }],
+  "parameters": [
+    {
+      "id": "CONTAINER_IMAGE",
+      "value": {
+        "default": "{{ docker.namespace }}/{{ docker.repo }}:{{ docker.tag }}",
+        "type": "string",
+        "visible": false,
+        "required": true,
+        "order": 1000
+      }
+    },
+    {
+      "id": "conversion",
+      "value": {
+        "default": "MNI2TAL",
+        "enumValues":[
+          {"MNI2TAL": "MNI TO TAL"},
+          {"TAL2MNI": "TAL TO MNI"}
+        ],
+        "type": "enumeration",
+        "visible": true, 
+        "required": true,
+        "order": 1000
+      },
+      "details": {
+        "label": "Conversion type",
+        "description": "Convert from MNI to TAL file or TAL to MNI file."
+      }
+    },
+    {
+      "id": "source",
+      "value": {
+        "default": "SPM",
+        "enumValues":[
+          {"Other": "AFNI"},
+          {"FSL": "FSL"},
+          {"SPM": "SPM"},
+          {"Other": "Other"}
+        ],
+        "type": "enumeration",
+        "visible": true, 
+        "required": true,
+        "order": 1000
+      },
+      "details": {
+        "label": "MNI source",
+        "description": "SPM is the commonly used source."
+      }
+    }
+  ],
+  "outputs": []
+}
