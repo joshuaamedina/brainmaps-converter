@@ -10,7 +10,8 @@
   "shortDescription": "{{ app.description }}",
   "longDescription": "",
   "modules": [
-    "load tacc-singularity"
+    "load tacc-singularity",
+    "load matlab/2022b"
   ],
   "ontology": [],
   "parallelism": "SERIAL",
