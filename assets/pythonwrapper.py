@@ -42,7 +42,6 @@ else:
 
 print(TEMPLATE)
 print(CONVERSION)
-print(SCRIPTS[TEMPLATE])
 
 def main():
     l1 = []

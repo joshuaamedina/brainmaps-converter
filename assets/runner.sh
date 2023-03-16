@@ -6,28 +6,12 @@ then
 fi
 . lib/container_exec.sh
 
-# Write an excution command below that will run a script or binary inside the 
-# requested container, assuming that the current working directory is 
-# mounted in the container as its WORKDIR. In place of 'docker run' 
-# use 'container_exec' which will handle setup of the container on 
-# a variety of host environments. 
-#
-# Here is a template:
-#
-# container_exec ${CONTAINER_IMAGE} COMMAND OPTS INPUTS
-#
-# Here is an example of counting words in local file 'poems.txt',
-# outputting to a file 'wc_out.txt'
-#
-# container_exec ${CONTAINER_IMAGE} wc poems.txt > wc_out.txt
-#
+BINDPATH=" --bind /opt/intel:/opt/intel "
 
-# set -x
-
-# set +x
+module unload xalt
 
 mv ${mnifile} userinput.txt
 
 singularity pull brainmap_converter.sif docker://joshuaamedina2000/brainmaps_converter:0.0.1
 
-singularity exec brainmap_converter.sif python3 pythonwrapper.py -t ${source} -c ${conversion}
+singularity exec ${BINDPATH} brainmap_converter.sif python3 pythonwrapper.py -t ${source} -c ${conversion}
